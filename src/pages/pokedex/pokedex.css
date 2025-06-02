@@ -1,0 +1,477 @@
+.pokedex-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.pokedex {
+    display: flex;
+    background: #dc143c;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* PARTIE GAUCHE */
+.pokedex-left {
+    width: 50%;
+    padding: 30px;
+    position: relative;
+}
+
+.top-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.big-light {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #87ceeb, #4169e1);
+    border: 8px solid #2c2c2c;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
+    margin-right: 20px;
+}
+
+.small-lights {
+    display: flex;
+    gap: 10px;
+}
+
+.light {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #2c2c2c;
+}
+
+.light.red { background: #ff0000; }
+.light.yellow { background: #ffff00; }
+.light.green { background: #00ff00; }
+
+.screen-section {
+    background: #e6e6e6;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 4px solid #2c2c2c;
+}
+
+.main-screen {
+    background: #000;
+    border-radius: 8px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    border: 2px solid #333;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.pokemon-display {
+    text-align: center;
+    color: white;
+}
+
+.pokemon-image {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.pokemon-display h2 {
+    margin: 5px 0;
+    text-transform: capitalize;
+}
+
+.pokemon-display h3 {
+    margin: 5px 0;
+    color: #00ff00;
+}
+
+.no-pokemon {
+    color: #00ff00;
+    font-size: 18px;
+}
+
+.screen-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.red-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ff0000;
+    border: 2px solid #2c2c2c;
+}
+
+.speaker-grille {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2px;
+    width: 100px;
+}
+
+.speaker-grille::before {
+    content: '';
+    grid-column: 1 / -1;
+    height: 3px;
+    background: repeating-linear-gradient(
+        90deg,
+        #2c2c2c 0px,
+        #2c2c2c 8px,
+        transparent 8px,
+        transparent 12px
+    );
+}
+
+.bottom-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.black-button {
+    width: 60px;
+    height: 25px;
+    background: #000;
+    border-radius: 25px;
+    border: 2px solid #2c2c2c;
+}
+
+.long-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.long-button {
+    width: 80px;
+    height: 15px;
+    border-radius: 15px;
+    border: 2px solid #2c2c2c;
+}
+
+.long-button.red { background: #ff0000; }
+.long-button.blue { background: #0000ff; }
+
+.cross-pad {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.cross-vertical, .cross-horizontal {
+    position: absolute;
+    background: #2c2c2c;
+    border-radius: 5px;
+}
+
+.cross-vertical {
+    width: 20px;
+    height: 60px;
+    left: 20px;
+}
+
+.cross-horizontal {
+    width: 60px;
+    height: 20px;
+    top: 20px;
+}
+
+.small-dots {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2c2c2c;
+}
+
+.green-screen {
+    width: 80px;
+    height: 40px;
+    background: #00ff00;
+    border-radius: 5px;
+    border: 2px solid #2c2c2c;
+}
+
+/* PARTIE DROITE */
+.pokedex-right {
+    width: 50%;
+    background: #dc143c;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-screen {
+    background: #000;
+    border-radius: 10px;
+    padding: 20px;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    min-height: 200px;
+    border: 3px solid #2c2c2c;
+}
+
+.pokemon-info {
+    color: white;
+}
+
+.pokemon-types {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.type-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.pokemon-stats p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.stats {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+}
+
+.search-section {
+    background: #e6e6e6;
+    border-radius: 10px;
+    padding: 15px;
+    border: 3px solid #2c2c2c;
+}
+
+.search-input {
+    width: 94%;
+    padding: 10px;
+    border: 2px solid #2c2c2c;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Courier New', monospace;
+}
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    background: #87ceeb;
+    border-radius: 10px;
+    padding: 15px;
+    border: 3px solid #2c2c2c;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.pokemon-card {
+    background: white;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.pokemon-card:hover {
+    transform: scale(1.05);
+    border-color: #2c2c2c;
+}
+
+.pokemon-card.selected {
+    border-color: #ff0000;
+    background: #ffeeee;
+}
+
+.pokemon-card img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.pokemon-card span {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.pokemon-card span:first-of-type {
+    color: #666;
+}
+
+.right-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.small-button {
+    width: 30px;
+    height: 30px;
+    background: #e6e6e6;
+    border-radius: 5px;
+    border: 2px solid #2c2c2c;
+}
+
+.yellow-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffff00;
+    border: 3px solid #2c2c2c;
+}
+
+.bottom-screens {
+    display: flex;
+    gap: 5px;
+}
+
+.bottom-screen {
+    width: 60px;
+    height: 40px;
+    background: #000;
+    border-radius: 5px;
+    border: 2px solid #2c2c2c;
+}
+
+.loading {
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    font-family: 'Courier New', monospace;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pokedex {
+        flex-direction: column;
+    }
+    
+    .pokedex-left, .pokedex-right {
+        width: 100%;
+    }
+    
+    .pokemon-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+}
+
+.confirm-button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #00ff00;
+    color: #000;
+    font-weight: bold;
+    border: 2px solid #2c2c2c;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+}
+
+.confirm-button:hover {
+    background-color: #00cc00;
+}
+
+.transition-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+
+.confirm-button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #00ff00;
+    color: #000;
+    font-weight: bold;
+    border: 2px solid #2c2c2c;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+}
+
+.confirm-button:hover {
+    background-color: #00cc00;
+}
+
+.fullscreen-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.fullscreen-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Pour bloquer toute interaction si nécessaire */
+}
+
+.gif-transition {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+}

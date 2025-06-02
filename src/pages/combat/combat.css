@@ -1,0 +1,210 @@
+.containerCombat {
+    background-image: url('../../assets/img/bgFight.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: 'Courier New', monospace;
+}
+
+.combat-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.enemy-info {
+    position: absolute;
+    top: 40px;
+    right: 70%;
+}
+
+.player-info {
+    position: absolute;
+    bottom: 200px;
+    left: 1300px;
+}
+
+.info-box {
+    background: white;
+    border: 2px solid black;
+    padding: 10px;
+    width: 350px;
+    color: black;
+}
+
+.name {
+    font-weight: bold;
+    text-transform: uppercase;
+    display: block;
+}
+
+.level {
+    float: right;
+}
+
+.hp-bar {
+    height: 10px;
+    background: #ccc;
+    margin-top: 5px;
+    position: relative;
+    width: 50%;
+
+}
+
+.hp-fill {
+    background: #78C850;
+    height: 100%;
+    width: 100%;
+}
+
+.enemy-pokemon {
+    position: absolute;
+    top: 250px;
+    right: 250px;
+}
+
+.player-pokemon {
+    position: absolute;
+    bottom: 0px;
+    left: 200px;
+}
+
+.sprite {
+    width: 400px;
+    image-rendering: pixelated;
+}
+
+.sprite.player {
+    transform: scaleX(-1); /* fait face à l'adversaire */
+}
+
+.combat-menu {
+    position: absolute;
+    bottom: 20px;
+    left: 80%;
+    transform: translateX(-50%);
+    background: #f5f5f5;
+    border: 2px solid black;
+    width: 30%;
+    padding: 20px;
+    text-align: left;
+    color: black;
+}
+
+.menu-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.menu-buttons button {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: white;
+    border: 2px solid black;
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translate(0px, 0px); }
+    20% { transform: translate(-10px, 0px); }
+    40% { transform: translate(10px, 0px); }
+    60% { transform: translate(-10px, 0px); }
+    80% { transform: translate(10px, 0px); }
+    100% { transform: translate(0px, 0px); }
+}
+
+.battle-message {
+    background: white;
+    border: 2px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+
+
+@keyframes dash-forward {
+    0% {
+        transform: scaleX(-1) translateX(0);
+    }
+    50% {
+        transform: scaleX(-1) translateX(-600px) translateY(-300px);
+    }
+    100% {
+        transform: scaleX(-1) translateX(0);
+    }
+}
+
+
+.enemy-ko {
+    animation: ko-exit 0.6s forwards ease-in;
+}
+
+@keyframes ko-exit {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(200px);
+    }
+}
+
+.battle-message {
+    background: white;
+    border: 2px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.enter-left {
+    animation: enterFromLeft 0.8s ease-out forwards;
+}
+
+.enter-right {
+    animation: enterFromRight 0.8s ease-out forwards;
+}
+
+.charge-attack {
+    animation: dash-forward 0.3s forwards;
+}
+
+@keyframes enterFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-500px) scaleX(1);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) scaleX(1);
+    }
+}
+
+@keyframes enterFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(500px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
