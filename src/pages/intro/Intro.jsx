@@ -1,4 +1,6 @@
 import Chen from '../../assets/img/professeur-chen.png'
+import BottomContent from '../../components/bottomContent/BottomContent'
+import './intro.css'
 
 export default function Intro(){
 
@@ -18,6 +20,8 @@ export default function Intro(){
 
                 </div>
             </div>
+
+            <BottomContent />
         
         </>
     )

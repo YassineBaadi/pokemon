@@ -1,0 +1,12 @@
+
+
+.containerBottom{
+    position: absolute;
+    height: 200px;
+    width: 1000px;
+    background-color:aliceblue;
+    border: 5px solid black;
+    border-radius: 10px;
+    bottom: 5%;
+    left: 24%;
+}
