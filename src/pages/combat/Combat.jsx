@@ -9,6 +9,11 @@ import ko from '../../assets/sound/pikachuSpawn.mp3';
 import bgSound from '../../assets/sound/battleMusic.mp3';
 import fireGif from '../../assets/img/fire.gif';
 import fireSound from '../../assets/sound/fireSound.mp3'
+import waterGif from '../../assets/img/surf.gif';
+import waterSound from '../../assets/sound/waterSound.mp3';
+import electricGif from '../../assets/img/eclair.gif';
+import electricSound from '../../assets/sound/electricSound.mp3';
+
 
 const battleMusic = new Audio(bgSound);
 const victoryMusic = new Audio(victory);
@@ -16,6 +21,9 @@ const attackSound = new Audio(attack);
 const koSound = new Audio(ko);
 const pikachuSpawn = new Audio(pikapika);
 const fireMusic = new Audio(fireSound);
+const waterAudio = new Audio(waterSound);
+const electricAudio = new Audio(electricSound);
+
 
 export default function Combat() {
     const location = useLocation();
@@ -33,6 +41,10 @@ export default function Combat() {
     const [enemyKO, setEnemyKO] = useState(false);
     const [battleStart, setBattleStart] = useState(false);
     const [showFireEffect, setShowFireEffect] = useState(false);
+    const [showWaterEffect, setShowWaterEffect] = useState(false);
+    const [showElectricEffect, setShowElectricEffect] = useState(false);
+    const [isAttackDisabled, setIsAttackDisabled] = useState(false);
+
 
     useEffect(() => {
         battleMusic.loop = true;
@@ -46,22 +58,29 @@ export default function Combat() {
         };
     }, []);
 
+    const startAttackCooldown = () => {
+        setIsAttackDisabled(true);
+        setTimeout(() => setIsAttackDisabled(false), 3000);
+    };
+
     useEffect(() => {
         setBattleStart(true);
         pikachuSpawn.currentTime = 1;
         pikachuSpawn.play();
         battleMusic.loop = true;
         battleMusic.play();
+        battleMusic.volume = 0.2
     }, []);
 
     const handleChargeAttack = () => {
         if (isChargeDisabled) return; 
 
-        setIsChargeDisabled(true);
-        setTimeout(() => setIsChargeDisabled(false), 2000);
+        startAttackCooldown();
+       
 
         attackSound.currentTime = 2;
         attackSound.play();
+        attackSound.volume = 0.2
         setBattleMessage(`${selectedPokemon.name} utilise Charge !`);
         setIsAttacking(true);
         setEnemyHP(prev => Math.max(prev - 20, 0));
@@ -75,6 +94,7 @@ export default function Combat() {
                 battleMusic.pause();
                 battleMusic.currentTime = 0;
                 victoryMusic.play();
+                victoryMusic.volume = 0.2
                 setEnemyKO(true);
                 setFightOver(true);
                 return;
@@ -97,13 +117,105 @@ export default function Combat() {
                     setBattleMessage('');
                 }
             }, 2000);
-        }, 2000);
+        }, 1000);
     };
 
-    const handleFireAttack = () => {
-    if (isChargeDisabled) return;
+    const handleWaterAttack = () => {
+    setShowWaterEffect(true);
+    startAttackCooldown();
+    waterAudio.currentTime = 0;
+    waterAudio.play();
+    setBattleMessage(`${selectedPokemon.name} utilise Surf !`);
+    setEnemyHP(prev => Math.max(prev - 30, 0));
 
-    setIsChargeDisabled(true);
+    setTimeout(() => {
+        setShowWaterEffect(false);
+        
+    }, 2000);
+     setTimeout(() => {
+        if (enemyHP - 35 <= 0) {
+            setBattleMessage("L'ennemi est K.O. !");
+            koSound.play();
+            battleMusic.pause();
+            battleMusic.currentTime = 0;
+            victoryMusic.play();
+            setEnemyKO(true);
+            setFightOver(true);
+            return;
+        }
+        setBattleMessage("Pikachu utilise Vive-Attaque !");
+        setIsEnemyAttacking(true);
+        setPlayerHP(prev => Math.max(prev - 15, 0));
+
+        setTimeout(() => {
+            setIsEnemyAttacking(false);
+            if (playerHP - 15 <= 0) {
+                setBattleMessage(`${selectedPokemon.name} est K.O. !`);
+                battleMusic.pause();
+                battleMusic.currentTime = 0;
+                audio.pause();
+                audio.currentTime = 0;
+                setFightOver(true);
+            } else {
+                setBattleMessage('');
+            }
+        }, 2000);
+    }, 2000);
+};
+
+const handleElectricAttack = () => {
+    startAttackCooldown();
+    setShowElectricEffect(true);
+
+    electricAudio.currentTime = 0;
+    electricAudio.play();
+    electricAudio.volume = 0.1
+
+    setTimeout(() => {
+        electricAudio.pause();
+        electricAudio.currentTime = 0;
+        setShowElectricEffect(false);
+        setIsChargeDisabled(false);
+    }, 2000);
+    
+    setBattleMessage(`${selectedPokemon.name} utilise Eclair !`);
+    setEnemyHP(prev => Math.max(prev - 35, 0));
+
+    setTimeout(() => {
+        if (enemyHP - 35 <= 0) {
+            setBattleMessage("L'ennemi est K.O. !");
+            koSound.play();
+            battleMusic.pause();
+            battleMusic.currentTime = 0;
+            victoryMusic.play();
+            setEnemyKO(true);
+            setFightOver(true);
+            return;
+        }
+        setBattleMessage("Pikachu utilise Vive-Attaque !");
+        setIsEnemyAttacking(true);
+        setPlayerHP(prev => Math.max(prev - 15, 0));
+
+        setTimeout(() => {
+            setIsEnemyAttacking(false);
+            if (playerHP - 15 <= 0) {
+                setBattleMessage(`${selectedPokemon.name} est K.O. !`);
+                battleMusic.pause();
+                battleMusic.currentTime = 0;
+                audio.pause();
+                audio.currentTime = 0;
+                setFightOver(true);
+            } else {
+                setBattleMessage('');
+            }
+        }, 2000);
+    }, 2000);
+};
+
+    const handleFireAttack = () => {
+    
+
+    startAttackCooldown();
     setShowFireEffect(true);
 
     fireMusic.currentTime = 0;
@@ -152,6 +264,9 @@ export default function Combat() {
 
 
     const isFireType = selectedPokemon?.apiTypes?.some(type => type.name === 'Feu');
+    const isWaterType = selectedPokemon?.apiTypes?.some(t => t.name === 'Eau');
+    const isElectricType = selectedPokemon?.apiTypes?.some(t => t.name === 'Électrik');
+
 
     return (
         <div className="containerCombat">
@@ -188,9 +303,12 @@ export default function Combat() {
                         </div>
                     )}
                 </div>
-                {showFireEffect && (
+                    {showFireEffect && (
                         <img src={fireGif} alt="Feu" className="fire-effect" />
                     )}
+                    {showWaterEffect && <img src={waterGif} alt="eau" className="water-effect" />}
+                    {showElectricEffect && <img src={electricGif} alt="éclair" className="electric-effect" />}
+
 
                 <div className="player-info">
                     <div className="info-box">
@@ -221,13 +339,13 @@ export default function Combat() {
 
                     {showAttackMenu && !fightOver && (
                         <div className="menu-buttons">
-                            <button onClick={handleChargeAttack} disabled={isChargeDisabled}>CHARGE</button>
-                            {isFireType && (
-                                <button onClick={handleFireAttack} disabled={isChargeDisabled}>LANCE-FLAMME</button>
-                            )}
+                            <button onClick={handleChargeAttack} disabled={isAttackDisabled}>CHARGE</button>
+                            {isWaterType && <button onClick={handleWaterAttack} disabled={isAttackDisabled}>SURF</button>}
+                            {isElectricType && <button onClick={handleElectricAttack} disabled={isAttackDisabled}>ÉCLAIR</button>}
+                            {isFireType && <button onClick={handleFireAttack} disabled={isAttackDisabled}>LANCE FLAMME</button>}
                             <button onClick={() => setShowAttackMenu(false)}>RETOUR</button>
                         </div>
-                    )}
+                        )}
 
                     {fightOver && (
                         <div className="menu-buttons">

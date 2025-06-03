@@ -4,6 +4,9 @@ import axios from 'axios';
 import './pokedex.css';
 import transition from '../../assets/img/Transition.gif'
 import musique from '../../assets/sound/battleMusic.mp3'
+import selectPoke from '../../assets/sound/selectPokemon.mp3'
+import soundDex from  '../../assets/sound/soundPokedex.mp3'
+import pikaRun from '../../assets/img/pikachuRun.gif'
 
 export default function Pokedex() {
     const [pokemon, setPokemon] = useState([]);
@@ -22,6 +25,7 @@ export default function Pokedex() {
                 setPokemon(response.data);
                 setFilteredPokemon(response.data);
                 setLoading(false);
+                
             })
             .catch((error) => {
                 console.log(error);
@@ -60,6 +64,11 @@ export default function Pokedex() {
     //Fonction pour attribuer le pokemon selectionné à selectedPokemon
     const handlePokemonSelect = (selectedPokemon) => {
         setSelectedPokemon(selectedPokemon);
+        
+        const musicS = new Audio(selectPoke)
+        musicS.play()
+        musicS.volume = 0.1
+    
     };
 
     //Fonction qui lance la musique à la confirmation
@@ -100,13 +109,17 @@ export default function Pokedex() {
     };
 
     if (loading) {
+        const sonDex = new Audio (soundDex)
+        sonDex.play()
+        sonDex.currentTime=0.2
         return (
             <div className="pokedex-container">
-                <div className="loading">Chargement du Pokédex...</div>
+                <img className='pikarun' src={pikaRun} alt="" />
+                <div className="loading"> Chargement du Pokédex...</div>
             </div>
         );
     }
-
+    
     return (
         <div className="pokedex-container">
             <div className="pokedex">

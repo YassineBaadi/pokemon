@@ -229,10 +229,33 @@
 .fire-effect{
    
    position: absolute;
-   left: 32%;
-   top: 34%;
-   width: 1000px;
+   left: 45%;
+   top: 45%;
+   width: 800px;
    
     transform: rotate(-20deg);
     
 }
+
+.water-effect{
+
+    position: absolute;
+    width: 100vw;
+}
+
+.electric-effect{
+       position: absolute;
+   left: 15%;
+   top: 2%;
+   width: 1800px;
+   
+    transform: rotate(-120deg);
+}
+
+.disabled-button {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+

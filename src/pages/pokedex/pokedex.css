@@ -1,6 +1,6 @@
 .pokedex-container {
     min-height: 100vh;
-    background-image: url('../../assets/img/bg-intro.jpg');
+    background-image: url('../../assets/img/bg-dex.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -12,7 +12,10 @@
     padding: 0;
 }
 
-
+.pikarun{
+    position: absolute;
+    top: 10%;
+}
 .pokedex {
     display: flex;
     background: #dc143c;
@@ -23,7 +26,7 @@
     width: 100%;
 }
 
-/* PARTIE GAUCHE */
+
 .pokedex-left {
     width: 50%;
     padding: 30px;
@@ -222,7 +225,6 @@
     border: 2px solid #2c2c2c;
 }
 
-/* PARTIE DROITE */
 .pokedex-right {
     width: 50%;
     background: #dc143c;
@@ -381,25 +383,13 @@
 
 .loading {
     text-align: center;
-    font-size: 30px;
+    font-size: 40px;
     color: black;
+    font-weight: bold;
     font-family: 'Courier New', monospace;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .pokedex {
-        flex-direction: column;
-    }
-    
-    .pokedex-left, .pokedex-right {
-        width: 100%;
-    }
-    
-    .pokemon-grid {
-        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-    }
-}
+
 
 .confirm-button {
     margin-top: 10px;
@@ -472,7 +462,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    pointer-events: none; /* Pour bloquer toute interaction si nécessaire */
+    pointer-events: none; 
 }
 
 .gif-transition {
