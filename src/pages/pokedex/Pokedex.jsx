@@ -111,7 +111,7 @@ export default function Pokedex() {
     if (loading) {
         const sonDex = new Audio (soundDex)
         sonDex.play()
-        sonDex.currentTime=0.2
+        sonDex.currentTime=0.15
         return (
             <div className="pokedex-container">
                 <img className='pikarun' src={pikaRun} alt="" />

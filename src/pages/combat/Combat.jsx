@@ -94,7 +94,7 @@ export default function Combat() {
                 battleMusic.pause();
                 battleMusic.currentTime = 0;
                 victoryMusic.play();
-                victoryMusic.volume = 0.2
+                victoryMusic.volume = 0.1
                 setEnemyKO(true);
                 setFightOver(true);
                 return;
