@@ -208,3 +208,31 @@
         transform: translateX(0);
     }
 }
+
+@keyframes dash-ennemy {
+    0% {
+        transform: scaleX(1) translateX(0);
+    }
+    50% {
+        transform: scaleX(1) translateX(-800px) translateY(400px);
+    }
+    100% {
+        transform: scaleX(1) translateX(0);
+    }
+}
+
+.charge-attack-ennemy{
+    animation: dash-ennemy 0.5s forwards;
+}
+
+
+.fire-effect{
+   
+   position: absolute;
+   left: 32%;
+   top: 34%;
+   width: 1000px;
+   
+    transform: rotate(-20deg);
+    
+}

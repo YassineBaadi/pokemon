@@ -14,11 +14,13 @@ export default function Pokedex() {
     const [showVideo, setShowVideo] = useState(false);
     const navigate = useNavigate();
 
+
+    // Get l'API
     useEffect(() => {
         axios.get("https://pokebuildapi.fr/api/v1/pokemon")
             .then((response) => {
                 setPokemon(response.data);
-                setFilteredPokemon(response.data.slice(0, 50));
+                setFilteredPokemon(response.data);
                 setLoading(false);
             })
             .catch((error) => {
@@ -27,42 +29,52 @@ export default function Pokedex() {
             });
     }, []);
 
+
+    //Filtrer la liste avec la barre de recherche 
     useEffect(() => {
         if (recherche.trim() === '') {
-            setFilteredPokemon(pokemon.slice(0, 50));
+            setFilteredPokemon(pokemon);
         } else {
             const filtered = pokemon.filter(p => 
                 p.name.toLowerCase().includes(recherche.toLowerCase()) ||
                 p.id.toString().includes(recherche)
             );
-            setFilteredPokemon(filtered.slice(0, 20));
+            setFilteredPokemon(filtered);
         }
     }, [recherche, pokemon]);
+    
 
+    //Afficher la transition (clic de la confirmation)
     useEffect(() => {
     if (showVideo) {
         const timeout = setTimeout(() => {
             setShowVideo(false);
             navigate('/combat', { state: { selectedPokemon } });
 
-        }, 2800);
+        }, 2700);
 
         return () => clearTimeout(timeout); 
     }
 }, [showVideo, navigate]);
 
-
+    //Fonction pour attribuer le pokemon selectionné à selectedPokemon
     const handlePokemonSelect = (selectedPokemon) => {
         setSelectedPokemon(selectedPokemon);
     };
 
+    //Fonction qui lance la musique à la confirmation
     const handleConfirm = () => {
     const audio = new Audio(musique);
     audio.play();
-    audio.volume = 0.5; 
+    audio.volume = 0.2; 
+    setTimeout(() => {
+        audio.pause()
+        audio.currentTime=0
+    }, 4000);
     setShowVideo(true);
 };
 
+    //Couleur en fonction du type du pokemonSelected
     const getTypeColor = (type) => {
         const colors = {
             'Normal': '#A8A878',
@@ -156,7 +168,7 @@ export default function Pokedex() {
                     </div>
                 </div>
 
-                {/* Partie droite */}
+                
                 <div className="pokedex-right">
                     <div className="info-screen">
                         {selectedPokemon && (
@@ -173,8 +185,7 @@ export default function Pokedex() {
                                     ))}
                                 </div>
                                 <div className="pokemon-stats">
-                                    <p><strong>Taille:</strong> {selectedPokemon.height}</p>
-                                    <p><strong>Poids:</strong> {selectedPokemon.weight}</p>
+                                 
                                     {selectedPokemon.stats && (
                                         <div className="stats">
                                             <p><strong>PV:</strong> {selectedPokemon.stats.HP}</p>

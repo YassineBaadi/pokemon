@@ -1,11 +1,17 @@
 .pokedex-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-image: url('../../assets/img/bg-intro.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+     height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
+
 
 .pokedex {
     display: flex;
@@ -375,8 +381,8 @@
 
 .loading {
     text-align: center;
-    font-size: 24px;
-    color: white;
+    font-size: 30px;
+    color: black;
     font-family: 'Courier New', monospace;
 }
 

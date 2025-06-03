@@ -7,12 +7,8 @@ import './bottomContent.css';
 const messages = [
     "Bonjour ! Bienvenue dans le monde merveilleux des Pokémon !",
     "Je me présente : je m'appelle Chen.",
-    "On m'appelle le Professeur Pokémon.",
-    "Ce monde est peuplé de créatures appelées Pokémon.",
-    "Pour certains, les Pokémon sont des animaux de compagnie, pour d'autres, ils sont un moyen de combattre.",
-    "Pour ma part...",
     "L'étude des Pokémon est ma profession.",
-    "J'ai dailleurs crée un Pokédex.",
+    "J'ai d'ailleurs crée un Pokédex.",
     "Utilise le pour parcourir l'ensemble des pokémons disponible.",
     "Choisis-en un pour ton premier combat !"
 ];
@@ -26,11 +22,11 @@ export default function BottomContent() {
     // Utiliser useCallback pour stabiliser la référence de la fonction
     const handleFinished = useCallback(() => {
         setCanAdvance(true);
-        // Si c'est le dernier message, afficher le bouton
+       
         if (index === messages.length - 1) {
             setShowButton(true);
         }
-    }, [index]); // Ajouter index comme dépendance
+    }, [index]); 
 
     useEffect(() => {
         const handleKeyDown = (e) => {
